@@ -1,0 +1,12 @@
+section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+    padding: 2em;
+    overflow: auto;
+}
+
+.xml-form>form {
+    display: flex;
+    flex-direction: column;
+}
