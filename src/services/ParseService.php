@@ -1,16 +1,42 @@
 <?php
 
+/**
+ * A class that parses XML data and writes it to a new file.
+ */
 class ParseService
 {
+    /**
+     * @var XMLReader The XMLReader instance used to read input XML data.
+     */
     private XMLReader $xmlReader;
+
+    /**
+     * @var XMLWriter The XMLWriter instance used to write output XML data.
+     */
     private XMLWriter $xmlWriter;
 
+    /**
+     * Creates a new ParseService instance.
+     *
+     * @param XMLReader $xmlReader The XMLReader instance to use for reading input XML data.
+     * @param XMLWriter $xmlWriter The XMLWriter instance to use for writing output XML data.
+     */
     public function __construct(XMLReader $xmlReader, XMLWriter $xmlWriter)
     {
         $this->xmlReader = $xmlReader;
         $this->xmlWriter = $xmlWriter;
     }
 
+
+    /**
+     * Parses XML data from an input file and writes it to an output file.
+     *
+     * @param string|null $inputFile The path to the input XML file.
+     * @param string|null $outputFile The path to the output XML file.
+     * @param DateTime|null $currentTime The current date and time to use for determining offer availability.
+     *
+     * @return array An array with keys "paused" and "active" representing the number of paused and active offers, respectively.
+     */
     public function parseXML(String $inputFile = null, String $outputFile = null, DateTime $currentTime = null)
     {
         if ($currentTime === null) {
@@ -84,6 +110,12 @@ class ParseService
         return ["paused" => $pausedOrders, "active" => $activeOrders];
     }
 
+
+    /**
+     * Writes an offer element to the output XML data.
+     *
+     * @param array $offer An array representing the offer data to write.
+     */
     private function writeElements(array $offer)
     {
         $xmlWriter = $this->xmlWriter;
